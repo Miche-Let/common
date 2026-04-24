@@ -117,7 +117,7 @@ public class Waiting extends BaseEntity {
 
 ## common 패키지 구조
 
-```
+```text
 common/
 ├── build.gradle
 ├── settings.gradle
