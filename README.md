@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Miche-Let:common:<TAG-or-COMMIT>'
+    implementation 'com.github.Miche-Let:common:main-SNAPSHOT'
 }
 ```
 
