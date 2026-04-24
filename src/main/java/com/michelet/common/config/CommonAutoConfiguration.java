@@ -2,7 +2,6 @@ package com.michelet.common.config;
 
 import com.michelet.common.exception.GlobalExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -10,7 +9,11 @@ import org.springframework.context.annotation.Import;
  *
  */
 @AutoConfiguration
-@ComponentScan(basePackages = "com.michelet.common")
-@Import(JpaAuditingConfig.class)
+@Import({
+        JpaAuditingConfig.class,
+        GlobalExceptionHandler.class
+})
+public class CommonAutoConfiguration {
+}
 public class CommonAutoConfiguration {
 }
