@@ -47,13 +47,6 @@ dependencies {
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    // 2. DB 및 Flyway (PostgreSQL)
-    // 테스트에서 H2 쓸 경우 충돌할 수 있습니다. H2 쓸 경우 그때 다시 수정 좀 해야할 것 같습니다.
-    // 다른방안으로 각 서비스별 Testcontainers 의존성 추가후 도커 컨테이너에서 테스트하면 됩니다.
-    api 'org.flywaydb:flyway-core'
-    api 'org.flywaydb:flyway-database-postgresql'
-    runtimeOnly 'org.postgresql:postgresql'
 }
 
 test {
