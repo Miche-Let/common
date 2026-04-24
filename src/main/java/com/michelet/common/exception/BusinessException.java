@@ -11,13 +11,11 @@ public class BusinessException extends RuntimeException {
     private final int httpStatus;
 
     public BusinessException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
-        this.errorCode = errorCode.getCode();
-        this.httpStatus = errorCode.getHttpStatus();
+        this(errorCode, null);
     }
 
     public BusinessException(ErrorCode errorCode, Throwable cause) {
-        super(errorCode.getMessage(), cause);
+        super(java.util.Objects.requireNonNull(errorCode, "errorCode must not be null").getMessage(), cause);
         this.errorCode = errorCode.getCode();
         this.httpStatus = errorCode.getHttpStatus();
     }
