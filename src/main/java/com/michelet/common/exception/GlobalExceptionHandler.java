@@ -42,8 +42,10 @@ public class GlobalExceptionHandler {
     // Enum / UUID 등 타입 변환 실패 (@RequestParam, @PathVariable)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(MethodArgumentTypeMismatchException e) {
-        String message = e.getName() + "의 값이 올바르지 않습니다: " + e.getValue();
-        log.warn("[TypeMismatch] {}", message);
+        String message = e.getName() + " 파라미터 형식이 올바르지 않습니다.";
+        log.warn("[TypeMismatch] param={}, requiredType={}",
+                e.getName(),
+                e.getRequiredType() != null ? e.getRequiredType().getSimpleName() : "unknown");
         return ResponseEntity.badRequest()
                 .body(ApiResponse.error("VALIDATION_002", message));
     }
@@ -51,7 +53,7 @@ public class GlobalExceptionHandler {
     // 헤더 누락, 요청 바디 파싱 실패 (JSON 구조 오류 등)
     @ExceptionHandler({MissingRequestHeaderException.class, HttpMessageNotReadableException.class})
     public ResponseEntity<ApiResponse<Void>> handleBadRequest(Exception e) {
-        log.warn("[BadRequest] {}", e.getMessage());
+        log.warn("[BadRequest] type={}", e.getClass().getSimpleName());
         return ResponseEntity.badRequest()
                 .body(ApiResponse.error("VALIDATION_003", "요청 형식이 올바르지 않습니다."));
     }
