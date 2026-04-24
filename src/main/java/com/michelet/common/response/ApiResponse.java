@@ -29,7 +29,8 @@ public record ApiResponse<T>(
     }
 
     public static <T> ApiResponse<T> success(SuccessCode code, T data) {
-        return new ApiResponse<>(true, data, code.getCode(), code.getMessage(),
+        SuccessCode successCode = java.util.Objects.requireNonNull(code, "successCode must not be null");
+        return new ApiResponse<>(true, data, successCode.getCode(), successCode.getMessage(),
                 LocalDateTime.now(), currentTraceId());
     }
 
