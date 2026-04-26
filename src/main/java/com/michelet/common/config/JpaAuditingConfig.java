@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * (common 은 누가 로그인 중인지 알 수 없기 때문).
  */
 @Configuration
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class JpaAuditingConfig {
 }
