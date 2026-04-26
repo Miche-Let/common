@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
         log.warn("[BusinessException] code={}, message={}", e.getErrorCode(), e.getMessage());
         return ResponseEntity
                 .status(e.getHttpStatus())
-                .body(ApiResponse.error(e.getErrorCode(), e.getMessage()));
+                .body(ApiResponse.fail(e.getErrorCode(), e.getMessage()));
     }
 
     // @Valid 유효성 검증 실패 (요청 바디)
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
                 .orElse("유효성 검증 실패");
         log.warn("[Validation] {}", message);
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("VALIDATION_001", message));
+                .body(ApiResponse.fail("VALIDATION_001", message));
     }
 
     // Enum / UUID 등 타입 변환 실패 (@RequestParam, @PathVariable)
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
                 e.getName(),
                 e.getRequiredType() != null ? e.getRequiredType().getSimpleName() : "unknown");
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("VALIDATION_002", message));
+                .body(ApiResponse.fail("VALIDATION_002", message));
     }
 
     // 헤더 누락, 요청 바디 파싱 실패 (JSON 구조 오류 등)
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleBadRequest(Exception e) {
         log.warn("[BadRequest] type={}", e.getClass().getSimpleName());
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("VALIDATION_003", "요청 형식이 올바르지 않습니다."));
+                .body(ApiResponse.fail("VALIDATION_003", "요청 형식이 올바르지 않습니다."));
     }
 
     // 그 외 예상치 못한 서버 에러
@@ -63,6 +63,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleException(Exception e) {
         log.error("[Unexpected Error]", e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error("INTERNAL_001", "서버 오류가 발생했습니다."));
+                .body(ApiResponse.fail("INTERNAL_001", "서버 오류가 발생했습니다."));
     }
 }

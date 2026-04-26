@@ -20,22 +20,24 @@ public record ApiResponse<T>(
         String traceId
 ) {
 
-    public static <T> ApiResponse<T> success(T data) {
+    public static <T> ApiResponse<T> ok(T data) {
         return new ApiResponse<>(true, data, null, null, LocalDateTime.now(), currentTraceId());
     }
 
-    public static <T> ApiResponse<T> success() {
+    public static <T> ApiResponse<T> ok() {
         return new ApiResponse<>(true, null, null, null, LocalDateTime.now(), currentTraceId());
     }
 
-    public static <T> ApiResponse<T> success(SuccessCode code, T data) {
+    public static <T> ApiResponse<T> ok(SuccessCode code, T data) {
         SuccessCode successCode = java.util.Objects.requireNonNull(code, "successCode must not be null");
         return new ApiResponse<>(true, data, successCode.getCode(), successCode.getMessage(),
                 LocalDateTime.now(), currentTraceId());
     }
 
-    public static <T> ApiResponse<T> error(String code, String message) {
-        return new ApiResponse<>(false, null, code, message, LocalDateTime.now(), currentTraceId());
+    public static <T> ApiResponse<T> fail(String code, String message) {
+        String safeCode = java.util.Objects.requireNonNull(code, "code must not be null");
+        String safeMessage = java.util.Objects.requireNonNull(message, "message must not be null");
+        return new ApiResponse<>(false, null, safeCode, safeMessage, LocalDateTime.now(), currentTraceId());
     }
 
     /**
