@@ -38,11 +38,11 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // Lombok
-    api 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // Tracing 정보를 로그(MDC)로 연결
-    api 'io.micrometer:micrometer-tracing-bridge-brave'
+    // Tracing 정보를 로그(MDC)로 연결 , 내부 구현용
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
