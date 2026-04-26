@@ -134,7 +134,7 @@ common/
         │   │   ├── ErrorCode.java
         │   │   └── GlobalExceptionHandler.java
         │   └── response/
-        │       └── ApiResponse.java
+        │       ├── ApiResponse.java
         │       └── SuccessCode.java
         └── resources/
             └── META-INF/spring/
