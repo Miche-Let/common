@@ -44,11 +44,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Miche-Let:common:main-SNAPSHOT'
+    implementation 'com.github.Miche-Let:common:<TAG-or-COMMIT>'
 }
 ```
 
 > `<TAG-or-COMMIT>` 는 깃 태그(`v0.0.1` 등), 브랜치(`main-SNAPSHOT`), 또는 커밋 해시.
+>
+> ex )
+> 
+> dependencies {
+implementation 'com.github.Miche-Let:common:dev-SNAPSHOT'
+}
 
 ### 2. `AuditorAware<UUID>` Bean 등록 (필수)
 
